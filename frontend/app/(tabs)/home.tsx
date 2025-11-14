@@ -307,150 +307,43 @@ export default function HomeScreen() {
     <SafeAreaView style={styles.container}>
   <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
 
-  <View
-    style={{
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      paddingHorizontal: 20,
-      paddingTop: 16,
-      paddingBottom: 10,
-      backgroundColor: '#fff',
-      borderBottomWidth: 1,
-      borderBottomColor: '#eaeaea',
-    }}
-  >
-    {/* Logo */}
-    <Text
-      style={{
-        fontSize: 33,
-        fontWeight: '00',
-        color: '#000',
-        letterSpacing: 1.5,
-      }}
-    >
-      DRYP
-    </Text>
+  <View style={styles.modernHeader}>
+    <Text style={styles.logoText}>DRYP</Text>
 
-    {/* Search */}
     <Pressable
       onPress={() => router.push('/(tabs)/search')}
-      style={{
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    borderColor: '#000',        // ✅ solid black border
-    borderWidth: 2,             // ✅ make it bold/visible
-    borderRadius: 25,           // ✅ rounded corners
-    paddingHorizontal: 18,
-    paddingVertical: 2,
-    flex: 1,
-    marginHorizontal: 19,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 3, 
-      }}
+      style={styles.searchBar}
     >
-      <Text style={{ fontSize: 16, color: '#333', marginRight: 6 }}>🔍</Text>
-      <Text
-        style={{
-          fontSize: 16,
-          fontWeight: '100',
-          color: '#111',
-          letterSpacing: 0.2,
-        }}
-      >
-        Search...
-      </Text>
+      <Ionicons name="search-outline" size={20} color="#666" />
+      <Text style={styles.searchPlaceholder}>Search styles...</Text>
     </Pressable>
 
-    {/* Theme toggle */}
-<Pressable onPress={() => router.push('/cart')}>
-  <Ionicons name="cart-outline" size={31} color="#000" />
-</Pressable>
-
+    <Pressable onPress={() => router.push('/cart')} style={styles.cartButton}>
+      <Ionicons name="cart-outline" size={24} color="#000" />
+    </Pressable>
   </View>
 
 
-<View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', marginVertical: 10 }}>
-  <Pressable
-    style={{
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: '#fff',
-      borderColor: '#ffffffff',
-      borderWidth: 2,
-      borderRadius: 25,
-      paddingHorizontal: 16,
-      paddingVertical: 5,
-      // elevation: 3,
-    }}
-    onPress={() => Alert.alert('Filters', 'Filter menu coming soon!')}
-  >
-    <Text style={{ fontSize: 19, color: '#000', fontWeight: '900' }}>☰</Text>
-  </Pressable>
+  <View style={styles.filtersRow}>
+    <Pressable style={styles.filterChip} onPress={() => Alert.alert('Filters', 'Filter menu coming soon!')}>
+      <Ionicons name="options-outline" size={16} color="#000" />
+    </Pressable>
 
+    <Pressable style={styles.filterChip} onPress={() => Alert.alert('Brands', 'Nike, Adidas, Zara, H&M, Uniqlo, Puma')}>
+      <Text style={styles.filterChipText}>Brand</Text>
+      <Ionicons name="chevron-down" size={14} color="#000" />
+    </Pressable>
 
-  <Pressable
-    style={{
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: '#fff',
-      borderColor: '#000',
-      borderWidth: 2,
-      borderRadius: 25,
-      paddingHorizontal: 16,
-      paddingVertical: 2,
-      elevation: 3,
-    }}
-    onPress={() => Alert.alert('Brands', 'Nike, Adidas, Zara, H&M, Uniqlo, Puma')}
-  >
-    <Text style={{ fontSize: 14, color: '#000', marginRight: 4 }}>Brand</Text>
-    <Text style={{ fontSize: 12, color: '#000' }}>▼</Text>
-  </Pressable>
+    <Pressable style={styles.filterChip} onPress={() => Alert.alert('Products', 'Shirts, Pants, Shoes, Jackets, Accessories')}>
+      <Text style={styles.filterChipText}>Category</Text>
+      <Ionicons name="chevron-down" size={14} color="#000" />
+    </Pressable>
 
-  <Pressable
-    style={{
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: '#fff',
-      borderColor: '#000',
-      borderWidth: 2,
-      borderRadius: 25,
-      paddingHorizontal: 16,
-      paddingVertical: 2,
-      elevation: 3,
-    }}
-    onPress={() => Alert.alert('Products', 'Shirts, Pants, Shoes, Jackets, Accessories')}
-  >
-    <Text style={{ fontSize: 14, color: '#000', marginRight: 4 }}>Product</Text>
-    <Text style={{ fontSize: 12, color: '#000' }}>▼</Text>
-  </Pressable>
-
-  <Pressable
-    style={{
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: '#fff',
-      borderColor: '#000',
-      borderWidth: 2,
-      borderRadius: 25,
-      paddingHorizontal: 16,
-      paddingVertical: 2,
-      elevation: 3,
-    }}
-    onPress={() => Alert.alert('Colors', 'Black, White, Blue, Red, Green, Gray')}
-  >
-    <Text style={{ fontSize: 14, color: '#000', marginRight: 4 }}>Col</Text>
-    <Text style={{ fontSize: 12, color: '#000' }}>▼</Text>
-  </Pressable>
-</View>
+    <Pressable style={styles.filterChip} onPress={() => Alert.alert('Colors', 'Black, White, Blue, Red, Green, Gray')}>
+      <Text style={styles.filterChipText}>Color</Text>
+      <Ionicons name="chevron-down" size={14} color="#000" />
+    </Pressable>
+  </View>
 
 
       <View style={styles.cardStack}>
@@ -565,12 +458,68 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#ffffff' },
+  container: { flex: 1, backgroundColor: '#FAFAFA' },
+  modernHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+    paddingTop: 12,
+    paddingBottom: 12,
+    backgroundColor: '#ffffff',
+    borderBottomWidth: 1,
+    borderBottomColor: '#f0f0f0',
+    gap: 12,
+  },
+  logoText: {
+    fontSize: 28,
+    fontWeight: '700',
+    color: '#000',
+    letterSpacing: 0.5,
+  },
+  searchBar: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#F5F5F5',
+    borderRadius: 12,
+    paddingHorizontal: 14,
+    paddingVertical: 10,
+    gap: 8,
+  },
+  searchPlaceholder: {
+    fontSize: 15,
+    color: '#999',
+    fontWeight: '400',
+  },
+  cartButton: {
+    padding: 6,
+  },
+  filtersRow: {
+    flexDirection: 'row',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    gap: 8,
+    backgroundColor: '#ffffff',
+  },
+  filterChip: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#F5F5F5',
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 20,
+    gap: 4,
+  },
+  filterChipText: {
+    fontSize: 13,
+    fontWeight: '600',
+    color: '#000',
+  },
   header: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16, paddingVertical: 12, backgroundColor: '#ffffff', justifyContent: 'space-between' },
-  headerTitle: { 
-    fontSize: 32, 
-    fontWeight: '900', 
-    color: '#000000', 
+  headerTitle: {
+    fontSize: 32,
+    fontWeight: '900',
+    color: '#000000',
     letterSpacing: -1,
     fontFamily: Platform.OS === 'ios' ? 'Helvetica-Bold' : 'sans-serif',
     textShadowColor: 'rgba(0, 0, 0, 0.3)',
@@ -613,17 +562,15 @@ cardContainer: {
 card: {
   width: SCREEN_WIDTH - 40,
   height: SCREEN_HEIGHT * 0.65,
-  backgroundColor: '#000',
-  borderRadius: 25,
+  backgroundColor: '#ffffff',
+  borderRadius: 24,
   overflow: 'hidden',
   position: 'absolute',
   shadowColor: '#000000',
-  shadowOffset: { width: 0, height: 8 },
-  shadowOpacity: 0.15,
-  shadowRadius: 20,
+  shadowOffset: { width: 0, height: 10 },
+  shadowOpacity: 0.12,
+  shadowRadius: 24,
   elevation: 8,
-
-  // This visually enlarges card without crossing header
   transform: [{ scaleY: 1.05 }],
 },
   nextCard: { opacity: 0.8, zIndex: 1, transform: [{ scale: 0.95 }] },
@@ -632,8 +579,7 @@ card: {
   width: '100%',
   height: '100%',
   resizeMode: 'cover',
-  borderRadius: 25,
-  flex: 1,
+  borderRadius: 24,
 },
  cardOverlay: {
   position: 'absolute',
@@ -642,7 +588,7 @@ card: {
   right: 0,
   paddingHorizontal: 20,
   paddingVertical: 25,
-  backgroundColor: '', // subtle fade for readability
+  background: 'linear-gradient(transparent, rgba(0,0,0,0.85))',
 },
 cardInfo: {
   flexDirection: 'column',

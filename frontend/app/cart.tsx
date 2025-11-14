@@ -82,11 +82,11 @@ export default function CartScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
-      
+
       {/* Header */}
-      <View style={styles.header}>
+      <View style={styles.modernHeader}>
         <Pressable onPress={() => router.back()} style={styles.backButton}>
-          <Text style={styles.backButtonText}>← Back</Text>
+          <Text style={styles.backButtonText}>←</Text>
         </Pressable>
         <Text style={styles.headerTitle}>Shopping Cart</Text>
         <View style={styles.placeholder} />
@@ -146,30 +146,34 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#ffffff',
   },
-  header: {
+  modernHeader: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: 20,
-    paddingVertical: 15,
+    paddingTop: 16,
+    paddingBottom: 16,
+    backgroundColor: '#ffffff',
     borderBottomWidth: 1,
     borderBottomColor: '#f0f0f0',
   },
   backButton: {
-    paddingVertical: 5,
+    padding: 8,
+    marginLeft: -4,
   },
   backButtonText: {
-    fontSize: 16,
-    fontWeight: '600',
+    fontSize: 24,
+    fontWeight: '300',
     color: '#000000',
   },
   headerTitle: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: '700',
     color: '#000000',
+    letterSpacing: -0.5,
   },
   placeholder: {
-    width: 50,
+    width: 40,
   },
   itemsHeader: {
     paddingHorizontal: 20,
@@ -186,21 +190,23 @@ const styles = StyleSheet.create({
   cartItem: {
     flexDirection: 'row',
     backgroundColor: '#ffffff',
-    borderRadius: 12,
-    marginBottom: 15,
+    borderRadius: 16,
+    marginBottom: 16,
     ...Platform.select({
       web: {
-        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+        boxShadow: '0 4px 16px rgba(0, 0, 0, 0.08)',
       },
       default: {
         shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 8,
-        elevation: 3,
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.08,
+        shadowRadius: 12,
+        elevation: 4,
       },
     }),
     overflow: 'hidden',
+    borderWidth: 1,
+    borderColor: '#f8f9fa',
   },
   itemImage: {
     width: 100,
@@ -241,16 +247,16 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   quantityButton: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
+    width: 36,
+    height: 36,
+    borderRadius: 18,
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 1,
+    borderWidth: 2,
   },
   decreaseButton: {
-    borderColor: '#e0e0e0',
-    backgroundColor: '#ffffff',
+    borderColor: '#e9ecef',
+    backgroundColor: '#f8f9fa',
   },
   increaseButton: {
     borderColor: '#000000',
@@ -310,15 +316,28 @@ const styles = StyleSheet.create({
   },
   checkoutButton: {
     backgroundColor: '#000000',
-    borderRadius: 12,
-    paddingVertical: 16,
+    borderRadius: 16,
+    paddingVertical: 18,
     alignItems: 'center',
     marginBottom: 12,
+    ...Platform.select({
+      web: {
+        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+      },
+      default: {
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.15,
+        shadowRadius: 12,
+        elevation: 6,
+      },
+    }),
   },
   checkoutButtonText: {
-    fontSize: 16,
+    fontSize: 17,
     fontWeight: '700',
     color: '#ffffff',
+    letterSpacing: 0.3,
   },
   continueShoppingButton: {
     alignItems: 'center',
@@ -351,13 +370,26 @@ const styles = StyleSheet.create({
   },
   continueButton: {
     backgroundColor: '#000000',
-    borderRadius: 12,
-    paddingHorizontal: 24,
-    paddingVertical: 12,
+    borderRadius: 16,
+    paddingHorizontal: 32,
+    paddingVertical: 16,
+    ...Platform.select({
+      web: {
+        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+      },
+      default: {
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.15,
+        shadowRadius: 12,
+        elevation: 6,
+      },
+    }),
   },
   continueButtonText: {
-    fontSize: 16,
-    fontWeight: '600',
+    fontSize: 17,
+    fontWeight: '700',
     color: '#ffffff',
+    letterSpacing: 0.3,
   },
 });

@@ -11,7 +11,10 @@ import {
 } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Ionicons } from '@expo/vector-icons'
+import { useRouter } from 'expo-router'
+
 export default function SearchScreen() {
+  const router = useRouter()
   const [searchQuery, setSearchQuery] = useState('')
 
   const brands = [
@@ -52,69 +55,30 @@ export default function SearchScreen() {
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
       
-      <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          paddingHorizontal: 20,
-          paddingTop: 16,
-          paddingBottom: 10,
-          backgroundColor: '#fff',
-          borderBottomWidth: 1,
-          borderBottomColor: '#eaeaea',
-        }}
-      >
-        {/* Logo */}
-        <Text
-          style={{
-            fontSize: 33,
-            fontWeight: '00',
-            color: '#000',
-            letterSpacing: 1.5,
-          }}
-        >
-          DRYP
-        </Text>
+      <View style={styles.modernHeader}>
+        <Text style={styles.logoText}>DRYP</Text>
 
-            {/* Search */}
-            <Pressable
-              onPress={() => router.push('/(tabs)/search')}
-              style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            backgroundColor: '#fff',
-            borderColor: '#000',        // ✅ solid black border
-            borderWidth: 2,             // ✅ make it bold/visible
-            borderRadius: 25,           // ✅ rounded corners
-            paddingHorizontal: 18,
-            paddingVertical: 2,
-            flex: 1,
-            marginHorizontal: 19,
-            shadowColor: '#000',
-            shadowOffset: { width: 0, height: 2 },
-            shadowOpacity: 0.25,
-            shadowRadius: 4,
-            elevation: 3, 
-              }}
-            >
-              <Text style={{ fontSize: 16, color: '#333', marginRight: 6 }}>🔍</Text>
-              <Text
-                style={{
-                  fontSize: 16,
-                  fontWeight: '100',
-                  color: '#111',
-                  letterSpacing: 0.2,
-                }}
-              >
-                Search...
-              </Text>
+        <View style={styles.searchInputContainer}>
+          <Ionicons name="search-outline" size={20} color="#666" />
+          <TextInput
+            style={styles.searchInput}
+            placeholder="Search brands, styles..."
+            placeholderTextColor="#999"
+            value={searchQuery}
+            onChangeText={setSearchQuery}
+            autoCapitalize="none"
+            autoCorrect={false}
+          />
+          {searchQuery.length > 0 && (
+            <Pressable onPress={() => setSearchQuery('')}>
+              <Ionicons name="close-circle" size={20} color="#999" />
             </Pressable>
+          )}
+        </View>
 
-        {/* Cart Icon */}
-        <Pressable onPress={() => router.push('/cart')}>
-  <Ionicons name="cart-outline" size={31} color="#000" />
-</Pressable>
+        <Pressable onPress={() => router.push('/cart')} style={styles.cartButton}>
+          <Ionicons name="cart-outline" size={24} color="#000" />
+        </Pressable>
       </View>
 
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
@@ -138,9 +102,9 @@ export default function SearchScreen() {
           ) : (
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               {brands.map((brand, index) => (
-                <View key={index} style={styles.brandCard}>
-                  <Text>{brand}</Text>
-                </View>
+                <Pressable key={index} style={styles.brandCard}>
+                  <Text style={styles.brandText}>{brand}</Text>
+                </Pressable>
               ))}
             </ScrollView>
           )}
@@ -353,12 +317,63 @@ const styles = StyleSheet.create({
   emptyContainer: {
     height: 50,
   },
-  brandCard: {
-    backgroundColor: '#f5f5f5',
+  modernHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     paddingHorizontal: 20,
-    paddingVertical: 15,
-    borderRadius: 15,
+    paddingTop: 16,
+    paddingBottom: 16,
+    backgroundColor: '#ffffff',
+    borderBottomWidth: 1,
+    borderBottomColor: '#f0f0f0',
+  },
+  logoText: {
+    fontSize: 28,
+    fontWeight: '800',
+    color: '#000000',
+    letterSpacing: -0.5,
+  },
+  searchInputContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#f8f9fa',
+    borderRadius: 12,
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    marginHorizontal: 16,
+    borderWidth: 1,
+    borderColor: '#e9ecef',
+  },
+  searchInput: {
+    flex: 1,
+    fontSize: 16,
+    color: '#000000',
+    marginLeft: 8,
+    paddingVertical: 0,
+  },
+  cartButton: {
+    padding: 4,
+  },
+  brandCard: {
+    backgroundColor: '#ffffff',
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    borderRadius: 12,
     marginRight: 10,
+    borderWidth: 1,
+    borderColor: '#e9ecef',
+    shadowColor: '#000000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  brandText: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#000000',
   },
   trendingCard: {
     backgroundColor: '#f5f5f5',
@@ -392,38 +407,45 @@ const styles = StyleSheet.create({
     height: 100,
   },
   productCard: {
-    width: 150,
+    width: 160,
     marginRight: 15,
     backgroundColor: '#ffffff',
-    borderRadius: 15,
-    padding: 10,
+    borderRadius: 16,
+    padding: 0,
+    overflow: 'hidden',
     shadowColor: '#000000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 3,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.08,
+    shadowRadius: 12,
+    elevation: 4,
   },
   productImage: {
     width: '100%',
-    height: 120,
-    borderRadius: 10,
-    backgroundColor: '#f5f5f5',
+    height: 160,
+    backgroundColor: '#f8f9fa',
   },
   productTitle: {
     fontSize: 14,
     fontWeight: '600',
     color: '#000000',
-    marginTop: 8,
+    marginTop: 0,
     marginBottom: 4,
+    paddingHorizontal: 12,
+    paddingTop: 12,
   },
   productBrand: {
-    fontSize: 12,
+    fontSize: 11,
     color: '#666666',
-    marginBottom: 4,
+    marginBottom: 6,
+    paddingHorizontal: 12,
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
   },
   productPrice: {
     fontSize: 16,
     fontWeight: '700',
     color: '#000000',
+    paddingHorizontal: 12,
+    paddingBottom: 12,
   },
 })
